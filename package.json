@@ -1,0 +1,22 @@
+{
+  "name": "tracking-components",
+  "version": "1.0.0",
+  "description": "this project will provide components for a private project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ridvandmrc/tracking-components.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ridvandmrc/tracking-components/issues"
+  },
+  "homepage": "https://github.com/ridvandmrc/tracking-components#readme",
+  "dependencies": {
+    "@stencil/core": "2.14.0"
+  }
+}
