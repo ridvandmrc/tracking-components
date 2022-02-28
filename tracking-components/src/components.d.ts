@@ -10,6 +10,11 @@ export namespace Components {
     interface TrackGridContainer {
         "col": ColumnType;
     }
+    interface TrackGridItem {
+        "l": number;
+        "m": number;
+        "s": number;
+    }
 }
 declare global {
     interface HTMLTrackGridContainerElement extends Components.TrackGridContainer, HTMLStencilElement {
@@ -18,16 +23,29 @@ declare global {
         prototype: HTMLTrackGridContainerElement;
         new (): HTMLTrackGridContainerElement;
     };
+    interface HTMLTrackGridItemElement extends Components.TrackGridItem, HTMLStencilElement {
+    }
+    var HTMLTrackGridItemElement: {
+        prototype: HTMLTrackGridItemElement;
+        new (): HTMLTrackGridItemElement;
+    };
     interface HTMLElementTagNameMap {
         "track-grid-container": HTMLTrackGridContainerElement;
+        "track-grid-item": HTMLTrackGridItemElement;
     }
 }
 declare namespace LocalJSX {
     interface TrackGridContainer {
         "col"?: ColumnType;
     }
+    interface TrackGridItem {
+        "l"?: number;
+        "m"?: number;
+        "s"?: number;
+    }
     interface IntrinsicElements {
         "track-grid-container": TrackGridContainer;
+        "track-grid-item": TrackGridItem;
     }
 }
 export { LocalJSX as JSX };
@@ -35,6 +53,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "track-grid-container": LocalJSX.TrackGridContainer & JSXBase.HTMLAttributes<HTMLTrackGridContainerElement>;
+            "track-grid-item": LocalJSX.TrackGridItem & JSXBase.HTMLAttributes<HTMLTrackGridItemElement>;
         }
     }
 }

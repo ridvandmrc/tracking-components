@@ -1,17 +1,5 @@
 :host{
-    --grid-count:12;
     display: flex;
     width: 100%;
-     flex: var(--grid-count);
-
-    div {
-        display: flex;
-        flex-grow: 1;
-        height: 48px;
-        border: 1px solid red;
-    }
-    
-    .one{
-        flex-grow: 2;
-    }
+    flex-wrap: wrap;
 }

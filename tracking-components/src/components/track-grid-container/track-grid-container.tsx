@@ -15,17 +15,28 @@ export class TrackGridContainer {
   @Element() host: HTMLElement;
 
   /**  */
-  @Prop() col: ColumnType = { s: 4, md: 8, l: 12 };
+  @Prop() col: ColumnType = { s: 4, md: 8, l: 24 };
 
-  componentDidRender(){
-    this.host.style.setProperty('--grid-count',`${this.col.s}`)
+  private readonly arrangeGridItemWidth = () => {
+    const items = Array.from(this.host.children).map(item => item as HTMLElement) as HTMLTrackGridItemElement[];
+    items.forEach((gridItem, index) => {
+      const gridWidth = (gridItem.l / this.col.l) * 100;
+      console.log(gridItem.l,'/',this.col.l)
+      gridItem.style.width = `${gridWidth}%`
+    });
+    console.log(items);
+  };
+
+  componentDidRender() {
+    this.host.style.setProperty('--grid-count', `${this.col.s}`);
+    this.arrangeGridItemWidth();
   }
 
   render() {
     return (
       <Host>
-        <slot></slot>
-        <div class="one"></div><div class="two"></div>
+        {' '}
+        <slot />
       </Host>
     );
   }
