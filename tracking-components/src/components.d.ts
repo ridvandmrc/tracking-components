@@ -12,7 +12,7 @@ export namespace Components {
     }
     interface TrackGridItem {
         "l": number;
-        "m": number;
+        "md": number;
         "s": number;
     }
 }
@@ -40,7 +40,7 @@ declare namespace LocalJSX {
     }
     interface TrackGridItem {
         "l"?: number;
-        "m"?: number;
+        "md"?: number;
         "s"?: number;
     }
     interface IntrinsicElements {

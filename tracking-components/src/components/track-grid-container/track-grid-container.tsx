@@ -15,27 +15,39 @@ export class TrackGridContainer {
   @Element() host: HTMLElement;
 
   /**  */
-  @Prop() col: ColumnType = { s: 4, md: 8, l: 24 };
+  @Prop() col: ColumnType = { s: 4, md: 4, l: 8 };
 
-  private readonly arrangeGridItemWidth = () => {
+  private observer: ResizeObserver;
+  private screenSize = null;
+
+  private readonly arrangeGridItemWidth = (baseContainer: string, baseItem: string) => {
     const items = Array.from(this.host.children).map(item => item as HTMLElement) as HTMLTrackGridItemElement[];
     items.forEach((gridItem, index) => {
-      const gridWidth = (gridItem.l / this.col.l) * 100;
-      console.log(gridItem.l,'/',this.col.l)
-      gridItem.style.width = `${gridWidth}%`
+      const gridWidth = (gridItem[baseItem] / this.col[baseContainer]) * 100;
+      gridItem.style.maxWidth = `${gridWidth}%`;
+      gridItem.style.flexBasis = `${gridWidth}%`;
     });
-    console.log(items);
   };
 
-  componentDidRender() {
-    this.host.style.setProperty('--grid-count', `${this.col.s}`);
-    this.arrangeGridItemWidth();
+  private trackScreenSize = (): void => {
+    const screenSize = getComputedStyle(this.host).getPropertyValue('--grid-count');
+    if (screenSize !== this.screenSize) {
+      console.debug(screenSize);
+      this.screenSize = screenSize;
+
+      this.arrangeGridItemWidth(screenSize, screenSize);
+    }
+  };
+
+  componentDidLoad() {
+    this.observer = new ResizeObserver(this.trackScreenSize);
+    this.observer.observe(this.host);
+    this.arrangeGridItemWidth('l', 'l');
   }
 
   render() {
     return (
       <Host>
-        {' '}
         <slot />
       </Host>
     );

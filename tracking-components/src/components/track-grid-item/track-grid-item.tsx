@@ -7,14 +7,13 @@ import { Component, Host, h, Prop } from '@stencil/core';
 })
 export class TrackGridItem {
   /** */
-  @Prop() s: number = 1;
+  @Prop({reflect:true}) s: number = 1;
 
   /** */
-  @Prop() m: number = 1;
+  @Prop({reflect:true}) md: number = 1;
 
   /** */
-  @Prop() l: number = 2;
-
+  @Prop({reflect:true}) l: number = 1;
   render() {
     return (
       <Host>
