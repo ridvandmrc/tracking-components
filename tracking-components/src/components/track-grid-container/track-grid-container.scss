@@ -1,14 +1,9 @@
+@import '../../global/breakpoint-vars.scss';
 :host {
   display: flex;
-  width: 100%;
+  width: var(--large-screen);
   flex-wrap: wrap;
   box-sizing: border-box;
   flex-direction: row;
   --grid-count:l;
-
-
-  @media (max-width: 900px) {
-    width: 50%;
-    --grid-count:md;
-  }
 }

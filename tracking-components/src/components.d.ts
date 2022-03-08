@@ -5,10 +5,11 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { ColumnType } from "./components/track-grid-container/track-grid-container";
+import { ColumnType } from "./utils/type-utils";
 export namespace Components {
     interface TrackGridContainer {
         "col": ColumnType;
+        "space": ColumnType;
     }
     interface TrackGridItem {
         "l": number;
@@ -37,6 +38,7 @@ declare global {
 declare namespace LocalJSX {
     interface TrackGridContainer {
         "col"?: ColumnType;
+        "space"?: ColumnType;
     }
     interface TrackGridItem {
         "l"?: number;
