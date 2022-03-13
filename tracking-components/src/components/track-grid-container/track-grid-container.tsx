@@ -1,5 +1,5 @@
 import { Component, Host, h, Element, Prop } from '@stencil/core';
-import { getBreakpoints, setAllBreakPoints } from '../../utils/utils';
+import { EvaluateMediaQuery, getBreakpoints, setAllBreakPoints } from '../../utils/utils';
 import { ColumnType, GridType, GRID } from '../../utils/type-utils';
 
 @Component({
@@ -15,7 +15,7 @@ export class TrackGridContainer {
 
   @Prop() space: ColumnType = { s: 1, md: 2, l: 3 };
 
-  private observer: ResizeObserver;
+  private observer: EvaluateMediaQuery;
 
   private readonly arrangeGridItemWidth = (baseContainer: GridType, baseItem: GridType) => {
     const items = Array.from(this.host.children).map(item => item as HTMLElement) as HTMLTrackGridItemElement[];
@@ -26,18 +26,9 @@ export class TrackGridContainer {
     });
   };
 
-  private trackScreenSize = (): void => {
-    const screenWidth = this.host.getBoundingClientRect().width;
-    if (screenWidth < getBreakpoints().small) {
-      this.arrangeGridItemWidth(GRID.small, GRID.small);
-      this.setSpacer(GRID.small);
-    } else if (screenWidth < getBreakpoints().medium) {
-      this.arrangeGridItemWidth(GRID.medium, GRID.medium);
-      this.setSpacer(GRID.medium);
-    } else {
-      this.arrangeGridItemWidth(GRID.large, GRID.large);
-      this.setSpacer(GRID.large);
-    }
+  private readonly setContainerSize = (baseContainer: GridType, baseItem: GridType): void => {
+    this.arrangeGridItemWidth(baseContainer, baseItem);
+    this.setSpacer(baseContainer);
   };
 
   private setSpacer = (baseContainer: GridType): void => {
@@ -51,9 +42,15 @@ export class TrackGridContainer {
 
   componentDidLoad() {
     setAllBreakPoints();
-    this.observer = new ResizeObserver(this.trackScreenSize);
-    this.observer.observe(this.host);
-    this.trackScreenSize();
+    this.observer = new EvaluateMediaQuery(this.host, {
+      small: () => this.setContainerSize(GRID.small, GRID.small),
+      large: () => this.setContainerSize(GRID.large, GRID.large),
+      medium: () => this.setContainerSize(GRID.medium, GRID.medium),
+    });
+  }
+
+  disconnectedCallback() {
+    this.observer.disconnect();
   }
 
   render() {
