@@ -26,7 +26,8 @@
     "generate": "stencil generate"
   },
   "dependencies": {
-    "@stencil/core": "^2.13.0"
+    "@stencil/core": "^2.13.0",
+    "classnames": "^2.3.1"
   },
   "devDependencies": {
     "@stencil/sass": "^1.5.2",
