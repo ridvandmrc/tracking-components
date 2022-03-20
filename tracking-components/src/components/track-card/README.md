@@ -1,1 +1,10 @@
-![card component](card.png)
+# track-card
+
+
+
+<!-- Auto Generated Below -->
+
+
+----------------------------------------------
+
+*Built with [StencilJS](https://stenciljs.com/)*

@@ -1,4 +1,4 @@
-import { Component, Host, h, Element, Prop } from '@stencil/core';
+import { Component, Host, h, Element, Prop, Watch } from '@stencil/core';
 import { EvaluateMediaQuery, getBreakpoints, setAllBreakPoints } from '../../utils/utils';
 import { ColumnType, GridType, GRID } from '../../utils/type-utils';
 
@@ -16,6 +16,14 @@ export class TrackGridContainer {
   @Prop() space: ColumnType = { s: 1, md: 2, l: 3 };
 
   private observer: EvaluateMediaQuery;
+
+  @Watch('col')
+  setCol() {
+    console.log('set cols');
+    this.setContainerSize(GRID.small, GRID.small);
+    this.setContainerSize(GRID.large, GRID.large);
+    this.setContainerSize(GRID.medium, GRID.medium);
+  }
 
   private readonly arrangeGridItemWidth = (baseContainer: GridType, baseItem: GridType) => {
     const items = Array.from(this.host.children).map(item => item as HTMLElement) as HTMLTrackGridItemElement[];
