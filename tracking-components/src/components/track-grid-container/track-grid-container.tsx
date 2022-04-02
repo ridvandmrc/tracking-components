@@ -50,7 +50,7 @@ export class TrackGridContainer {
 
   componentDidLoad() {
     setAllBreakPoints();
-    this.observer = new EvaluateMediaQuery(this.host, {
+    this.observer = new EvaluateMediaQuery(document.documentElement, {
       small: () => this.setContainerSize(GRID.small, GRID.small),
       large: () => this.setContainerSize(GRID.large, GRID.large),
       medium: () => this.setContainerSize(GRID.medium, GRID.medium),
